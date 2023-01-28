@@ -1,7 +1,10 @@
 package web.config;
 
+import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -13,12 +16,15 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:hibernate.properties")
 @EnableTransactionManagement // транзакции управляются спрингом
+@ComponentScan(value = "web")
 public class HibernateConfig {
 
     private final Environment env;
@@ -30,11 +36,12 @@ public class HibernateConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean factoryBean =
+                new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setPackagesToScan("web.model");
-        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        factoryBean.setJpaVendorAdapter(adapter);   
+        factoryBean.setPackagesToScan("web");
+        factoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         factoryBean.setJpaProperties(getHibernateProperties());
         return factoryBean;
 
@@ -68,5 +75,10 @@ public class HibernateConfig {
     @Bean
     public PersistenceExceptionTranslationPostProcessor postProcessor() {
         return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+    @Bean
+    public EntityManager entityManager(@NotNull EntityManagerFactory entityManagerFactory) {
+        return entityManagerFactory.createEntityManager();
     }
 }
