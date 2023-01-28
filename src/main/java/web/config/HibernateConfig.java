@@ -77,8 +77,8 @@ public class HibernateConfig {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
-    @Bean
-    public EntityManager entityManager(@NotNull EntityManagerFactory entityManagerFactory) {
-        return entityManagerFactory.createEntityManager();
-    }
+//    @Bean
+//    public EntityManager entityManager(@NotNull EntityManagerFactory entityManagerFactory) {
+//        return entityManagerFactory.createEntityManager();
+//    }
 }
