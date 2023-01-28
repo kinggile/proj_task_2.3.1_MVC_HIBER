@@ -11,7 +11,6 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 
-
 // замена appContextSpringMVC
 // Spring Config (WebMVCConfig)
 @Configuration
@@ -33,7 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/pages/");
         templateResolver.setSuffix(".html");
-        //    templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
 
