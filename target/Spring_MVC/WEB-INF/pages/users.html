@@ -24,8 +24,8 @@
         <td th:text="${user.getName()}"></td>
         <td th:text="${user.getSurname()}"></td>
         <td th:text="${user.getAge()}"></td>
-        <td th:text="EDIT">
-            <a th:href="@{/{id}(id = ${user.getId()})/edit}">Edit</a>
+        <td>
+            <a th:href="@{/users/{id}(id = ${user.getId()})/edit}">Edit</a>
         </td>
         <td>
             <form th:method="DELETE" th:action="@{/users}">
@@ -37,6 +37,11 @@
     </tbody>
 
 </table>
+
+<br>
+<hr/>
+
+<a th:href="@{/users/new}">Add</a>
 
 </body>
 </html>
