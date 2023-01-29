@@ -36,4 +36,9 @@ public class UserDAOImpl implements UserDAO {
         userToBeUpdated.setAge(updatedUser.getAge());
     }
 
+    @Override
+    public void deleteUser(int id) {
+        entityManager.detach(entityManager.find(User.class, id));
+    }
+
 }
