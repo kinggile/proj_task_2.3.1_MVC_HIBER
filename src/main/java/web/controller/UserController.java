@@ -35,26 +35,26 @@ public class UserController {
         return "newUser";
     }
 
-    @PostMapping()
+    @PostMapping("/new")
     public String createNewUser(@ModelAttribute("user") User user) {
         userService.save(user);
 
         return "redirect:/users";
     }
 
-    @GetMapping("{id}/edit")
+    @GetMapping("edit/{id}")
     public String editUser(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.getOneUser(id));
         return "edit";
     }
 
-    @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.updateUser(id, user);
+    @PatchMapping("/edit/{id}")
+    public String editUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+        userService.updateUser(user);
         return "redirect:/users";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(id);
         return "redirect:/users";

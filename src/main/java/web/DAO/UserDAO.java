@@ -12,8 +12,7 @@ public interface UserDAO {
 
     User getOneUser(int id);
 
-    void updateUser(int id, User updatedUser);
-
+    public void updateUser(User user);
     void deleteUser(int id);
 
 }

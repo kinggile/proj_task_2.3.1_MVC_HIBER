@@ -28,17 +28,16 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void updateUser(int id, User updatedUser) {
-        User userToBeUpdated = entityManager.find(User.class, id);
-
-        userToBeUpdated.setName(updatedUser.getName());
-        userToBeUpdated.setSurname(updatedUser.getSurname());
-        userToBeUpdated.setAge(updatedUser.getAge());
+    public void updateUser(User user) {
+        entityManager.merge(user);
+ //       entityManager.flush();
     }
 
     @Override
     public void deleteUser(int id) {
-        entityManager.detach(entityManager.find(User.class, id));
+        entityManager.createQuery("delete from User where id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
 }
