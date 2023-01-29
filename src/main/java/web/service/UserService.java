@@ -10,4 +10,8 @@ public interface UserService {
 
     void save(User user);
 
+    User getOneUser(int id);
+
+    void updateUser(int id, User updatedUser);
+
 }

@@ -21,4 +21,19 @@ public class UserDAOImpl implements UserDAO {
     public void save(User user) {
         entityManager.persist(user);
     }
+
+    @Override
+    public User getOneUser(int id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public void updateUser(int id, User updatedUser) {
+        User userToBeUpdated = entityManager.find(User.class, id);
+
+        userToBeUpdated.setName(updatedUser.getName());
+        userToBeUpdated.setSurname(updatedUser.getSurname());
+        userToBeUpdated.setAge(updatedUser.getAge());
+    }
+
 }

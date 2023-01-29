@@ -35,15 +35,6 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
-    // для кириллицы
-    @Override
-    protected Filter[] getServletFilters() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return new Filter[]{characterEncodingFilter};
-    }
-
     // для работы с запросами patch, delete, кроме GET POST
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
@@ -51,8 +42,18 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         registerHiddenFieldFilter(aServletContext);
     }
 
-    private void registerHiddenFieldFilter(@NotNull ServletContext aContext) {
+    private void registerHiddenFieldFilter(ServletContext aContext) {
         aContext.addFilter("hiddenHttpMethodFilter",
-                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null, true, "/*");
+                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
     }
+
+
+    // для кириллицы
+//    @Override
+//    protected Filter[] getServletFilters() {
+//        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+//        characterEncodingFilter.setEncoding("UTF-8");
+//        characterEncodingFilter.setForceEncoding(true);
+//        return new Filter[]{characterEncodingFilter};
+//    }
 }

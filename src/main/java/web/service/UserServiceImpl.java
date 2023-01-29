@@ -28,4 +28,16 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         userDAO.save(user);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public User getOneUser(int id) {
+        return userDAO.getOneUser(id);
+    }
+
+    @Transactional
+    @Override
+    public void updateUser(int id, User updatedUser) {
+        userDAO.updateUser(id, updatedUser);
+    }
 }
