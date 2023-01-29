@@ -34,9 +34,9 @@ public class UserController {
         return "newUser";
     }
 
-    @PostMapping
+    @PostMapping()
     public String createNewUser(@ModelAttribute("user") User user) {
-        // save
+        userService.save(user);
 
         return "redirect:/users";
     }
