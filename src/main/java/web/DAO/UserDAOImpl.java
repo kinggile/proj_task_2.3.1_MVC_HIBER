@@ -30,7 +30,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void updateUser(User user) {
         entityManager.merge(user);
- //       entityManager.flush();
+        //       entityManager.flush();
     }
 
     @Override

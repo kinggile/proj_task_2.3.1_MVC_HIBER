@@ -42,14 +42,14 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String editUser(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.getOneUser(id));
         return "edit";
     }
 
     @PatchMapping("/edit/{id}")
-    public String editUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+    public String editUser(@ModelAttribute("user") User user) {
         userService.updateUser(user);
         return "redirect:/users";
     }
