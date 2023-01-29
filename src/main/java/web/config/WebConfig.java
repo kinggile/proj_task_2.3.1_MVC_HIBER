@@ -1,5 +1,6 @@
 package web.config;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
@@ -45,7 +46,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
+    public void configureViewResolvers(@NotNull ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);

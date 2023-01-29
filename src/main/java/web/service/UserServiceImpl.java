@@ -22,4 +22,10 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
     }
+
+    @Transactional
+    @Override
+    public void save(User user) {
+        userDAO.save(user);
+    }
 }
